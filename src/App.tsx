@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useNabeatu } from "./components/counter";
+import { count } from "console";
 
-function App() {
+export interface NabeatuProps {
+  isAho: boolean;
+}
+
+const Nabeatu: React.VFC<NabeatuProps> = ({ isAho }) => (
+  <>
+    {isAho ? (
+      <div className="aho">Nabeatu(Aho)</div>
+    ) : (
+      <div>Nabeatu(Normal)</div>
+    )}
+  </>
+);
+
+function NabeatuCounter() {
+  const [count, countUp, isAho] = useNabeatu();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>世界のナベアツカウンター</h1>
+      <p>{count}</p>
+      <div className="btn" onClick={countUp}>
+        Count up!
+      </div>
+      <Nabeatu isAho={isAho} />
     </div>
   );
 }
 
-export default App;
+export default NabeatuCounter;
